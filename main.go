@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"io/ioutil"
+	"os"
 )
 
 func check(e error) {
@@ -13,7 +14,12 @@ func check(e error) {
 }
 
 func main() {
-	proverbs, err := ioutil.ReadFile("/tmp/dat")
+	if len(os.Args) != 2 {
+		fmt.Println("You must specify one arg as a file path")
+		os.Exit(1)
+	}
+	arg := os.Args[1]
+	proverbs, err := ioutil.ReadFile(arg)
 	sproverbs := string(proverbs)
 	check(err)
 
